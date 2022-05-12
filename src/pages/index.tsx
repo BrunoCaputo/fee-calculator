@@ -3,16 +3,17 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { useAuth } from "../providers/auth.provider";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const user = null;
+  const { authUser, loading } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (!loading && !authUser) {
       router.push("/login");
     }
-  }, [user, router]);
+  }, [authUser, loading, router]);
 
   return (
     <Container>
